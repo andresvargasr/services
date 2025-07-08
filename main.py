@@ -1,18 +1,30 @@
-from extract_pdf_text import extract_pdf_text
+from build_or_load_vectorstore import build_or_load_vectorstore
 from query_ollama import query_ollama
 
-pdf_path = "Manual_de_usuario_WH 7054.pdf"
-document = extract_pdf_text(pdf_path)
+def retrieve_context(query, vectorstore, k=5):
+    docs = vectorstore.similarity_search(query, k=k)
+    return "\n\n".join(doc.page_content for doc in docs)
 
-question = "Como instalar el calentador"
-prompt = f"""Ayuda con ...
+def chat_loop():
+    vs = build_or_load_vectorstore()
+    print("🤖 Hazme una pregunta (escribe 'exit' para salir):")
 
-DOCUMENT:
-{document[:3000]}  # You may need to chunk large PDFs
+    while True:
+        query = input("\nYou: ")
+        if query.lower() in ("exit", "quit"):
+            break
 
-QUESTION:
-{question}
+        context = retrieve_context(query, vs)
+        prompt = f"""You are a helpful assistant. Use the context below to answer the question.
+
+Context:
+{context}
+
+Question:
+{query}
 """
+        answer = query_ollama(prompt)
+        print("\n🧠 DeepSeek:\n", answer)
 
-response = query_ollama(prompt)
-print("\nAI Response:\n", response)
+if __name__ == "__main__":
+    chat_loop()
