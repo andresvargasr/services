@@ -3,7 +3,21 @@
 This is a Retrieval-Augmented Generation (RAG) pipeline that lets you ask questions about many PDF files using 
 local models like DeepSeek 1.5b with Ollama.
 
-## 🧱 Features
+##  Pre requisites
+
+Install ollama server
+Windows
+    https://ollama.com/download/windows
+Mac os 
+    ```bash
+     brew install ollama
+    ```
+Pull the model
+    ```bash
+     ollama pull deepseek-r1:1.5b
+    ```
+
+## 🧱 This project features
 
 - PDF parsing and text chunking
 - Vector search using ChromaDB
@@ -15,6 +29,10 @@ local models like DeepSeek 1.5b with Ollama.
 1. Clone this repo and install dependencies:
     ```bash
     pip install -r requirements.txt
+    ```
+   Also run this to install vectorstore
+    ```bash
+     pip install --upgrade langchain langchain-community chromadb
     ```
 
 2. Add your PDFs to the `/pdfs` folder.

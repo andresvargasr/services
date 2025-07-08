@@ -7,7 +7,6 @@ from extract_and_chunk_pdfs import extract_and_chunk_pdfs
 embedding_model = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
 CHROMA_DIR = "chroma_db"
 
-
 def build_or_load_vectorstore():
     if os.path.exists(CHROMA_DIR) and os.listdir(CHROMA_DIR):
         print("[✓] Loading existing Chroma vector store...")
