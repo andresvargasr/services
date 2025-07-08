@@ -17,3 +17,5 @@ def extract_and_chunk_pdfs():
                 for chunk in splitter.split_text(text):
                     docs.append(Document(page_content=chunk, metadata={"source": filename}))
     return docs
+
+

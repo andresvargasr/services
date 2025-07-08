@@ -1,4 +1,5 @@
-pdfplumber
+pdfplumber~=0.11.7
 chromadb
-langchain
+langchain~=0.3.26
 sentence-transformers
+streamlit~=1.46.1
